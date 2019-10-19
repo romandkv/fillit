@@ -16,6 +16,8 @@ int     if_square(const char *array)
     count = 0;
     while (array[count])
     {
+        if (array[count] != '\n' && count % 4 == 0)
+            return (0);
         count++;
     }
     return (count == 21);
@@ -44,7 +46,7 @@ int     if_invalid_char(const char *array)
         return (-1);
     while (*array)
     {
-        if (*array != '#' || *array != '.')
+        if (*array != '#' || *array != '.' || *array != '\n')
             return (0);
         array++;
     }
@@ -64,13 +66,13 @@ int     if_valid_attachment(const char *array)
     {
         if (array[i] == '#')
         {
-            if (array[i + 4] == '#' && i + 4 < 16)
+            if (array[i + 5] == '#' && i + 5 < 19)
                 res++;
-            if (array[i + 1] == '#' && i + 1 < 16)
+            if (array[i + 1] == '#' && i + 1 < 19)
                 res++;
             if (array[i - 1] == '#' && i - 1 > -1)
                 res++;
-            if (array[i - 4] == '#' && i - 4 > -1)
+            if (array[i - 5] == '#' && i - 5 > -1)
                 res++;
         }
         i++;
