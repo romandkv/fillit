@@ -1,52 +1,26 @@
-#include <fcntl.h>
-#include "gnl/get_next_line.h"
+#include "fillit.h"
 
-void    get_tetrino(char *buff, char *line)
+t_tetr	*get_tetr(int fd)
 {
-    char *tmp;
+	char	*buff;
+	t_tetr	*t;
+	int	i;
 
-    if (!*line)
-        line = ft_strnew(1);
-    tmp = strjoin(line, buff);
-    free(line);
-    free(buff);
-    line = tmp;
-}
-
-char    *get_list_tetrino(int fd)
-{
-    char *buff;
-    char *line;
-    int count;
-    int flag;
-
-    count = 0;
-    while (flag = get_next_line(fd, &buff))
-    {
-        if (count == 4)
-        {
-            break;
-        }
-        get_tetrino(buff, line);
-        count++;
-    }
-    if (flag == 0)
-        return (NULL);
-    return (line);
-}
-
-int     parser(const char *filename)
-{
-    int fd;
-    char *buff;
-    char *line;
-    t_tetro *list;
-
-    tetro = ft_strnew(1);
-    fd = open(filename, O_RDONLY);
-    while (line = get_list_tetrino(fd))
-    {
-        push(line, list);
-
-    }
+	i = 1;
+	get_next_line(fd, &buff);
+	t = new(buff);
+	while (get_next_line(fd, &buff))
+	{
+		concat(buff, t);
+		i++;
+		printf("%d\n", i);
+		if (i == 4)
+		{
+			i = 0;
+			t->next = new("");
+			t = t->next;
+		}
+	}
+	free(buff);
+	return (t);	
 }
