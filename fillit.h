@@ -1,19 +1,24 @@
 #ifndef FILLIT_H
-#define FILLIT_h
+#define FILLIT_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include "libft/libft.h"
-typedef struct		s_tetr
+typedef struct	s_point
 {
-	char		*buff;
-	struct s_tetr	*next;
-}			t_tetr;
+	int	x;
+	int	y;
+}		t_point;
 
-int     check_all(t_tetr *t);
-t_tetr  *get_tetr(int fd);
-void    concat(char *buff, t_tetr *t);
-t_tetr  *new(char *buff);
-int     get_next_line(const int fd, char **line);
+typedef struct	s_tetro
+{
+	char	**pos;
+	char	c;
+	int	w;
+	int	h;
+}		t_tetro;
+
+typedef struct	s_map
+{
+	int	size;
+	char	**ar;
+}		t_map;
+
 #endif
